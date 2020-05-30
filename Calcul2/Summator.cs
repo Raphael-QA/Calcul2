@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calcul2
 {
-    class Summator
+    public class Summator
     {
        
        public Stack<int> nums;
@@ -33,7 +33,7 @@ namespace Calcul2
                     nums.Push(d - c); break;
             }
         }
-        private int Priority(char a)
+        public int Priority(char a)
         {
             switch (a)
             {
@@ -65,22 +65,28 @@ namespace Calcul2
             }
             return count;
         }
-        private void Bracket(int znakI,string stroka, int i)
+        public void BracketOut()
+        {
+            if (znak.Peek() == '(')
+            {
+                znak.Pop();
+            }
+            else                                        //+4+(7-89+7)-1
+            {
+                while (znak.Peek() != '(')
+                {
+                    Calculator();
+                }
+                znak.Pop();
+            }
+        }
+        
+        
+        public void Bracket(int znakI,string stroka, int i)
         {
             if (znakI == 2)
             {
-                if (znak.Peek() == '(')
-                {
-                    znak.Pop();
-                }
-                else                             //+4+(7-89+7)-1
-                {
-                    while (znak.Peek() != '(')
-                    {
-                        Calculator();
-                    }
-                    znak.Pop();
-                }
+                BracketOut();
             }
             else
             {
@@ -105,7 +111,6 @@ namespace Calcul2
             if (znak.Count == 0)
             {
                 znak.Push(stroka[i]);
-
             }
             else
             {
@@ -130,19 +135,19 @@ namespace Calcul2
                     znak.Push(stroka[i]);
                 }
 
-            } //1+2*(3+4/2-(1+2))*2+1
-        }
-        public void Test()
-        {
-            //1+2*(3+4/2-(1+2))*2+1
-            foreach (int a in nums)
-            {
-                Console.WriteLine(a);
-            }
-            foreach (char q in znak)
-            {
-                Console.WriteLine(q);
             }
         }
+        //public void Test()  //метод только для теста
+        //{
+        //    //1+2*(3+4/2-(1+2))*2+1
+        //    foreach (int a in nums)
+        //    {
+        //        Console.WriteLine(a);
+        //    }
+        //    foreach (char q in znak)
+        //    {
+        //        Console.WriteLine(q);
+        //    }
+        //}
     }
 }
